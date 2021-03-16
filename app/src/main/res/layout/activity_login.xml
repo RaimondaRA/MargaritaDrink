@@ -67,19 +67,19 @@
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:background="@color/colorPurple"
+            android:backgroundTint="@color/colorPurple"
             android:text="@string/login_login" />
 
         <Button
             android:id="@+id/register"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:background="@color/colorGrey"
+            android:backgroundTint="@color/colorGrey"
             android:text="@string/login_register" />
 
     </LinearLayout>

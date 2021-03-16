@@ -1,7 +1,5 @@
 package com.example.corona_2021;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,49 +7,40 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity { //Klases pradzia
 
-    EditText username, password;
-    Button login, register;
+    @Override //Perrašymas nustatyta is anksto koda
+    protected void onCreate(Bundle savedInstanceState) { //Funkcijos pradzia
+        super.onCreate(savedInstanceState); //Tuscio lango sukurimas
+        setContentView(R.layout.activity_login); //Suteik tusciam langui šį vaizda (kodas susiejamas su vaizdu)
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        EditText username = findViewById(R.id.username); //Susiejamas elementas vaizde su kintamuoju kode
+        EditText password = findViewById(R.id.password);
+        Button kaipNoriuTaipVadinu = findViewById(R.id.login);
 
-        final EditText username = findViewById(R.id.username);
-        final EditText password = findViewById(R.id.password);
-        Button login = findViewById(R.id.login);
-
-        login.setOnClickListener(new View.OnClickListener() {
+        //Kodas, susijes su mygtuko paspaudimu
+        kaipNoriuTaipVadinu.setOnClickListener(new View.OnClickListener() { //setOnClickListener - nustatytk ant paspaudimo; skliausteliuose () yra funkcija (onClick) (o ne kintamasis), kintamuju niekada nebus tokiuose skliausteliouse
             @Override
-            public void onClick(View focusView) {
+            public void onClick(View view) { //onClick pradzia, onClick yra metodas
+                //Cia rasomas kodas, kuris bus vykdomas, kai bus paspaustas mygtukas
+                String usernameStr = username.getText().toString(); //Stringams - pagarba: String rasoma is didziosios raides; String - bazinis tipas; String - kabutese
+                String passwordStr = password.getText().toString(); //getText - issitraukti teksta, kurio mums reikia
 
-                String username2 = username.getText().toString();
-                String password2 = password.getText().toString();
-                Toast.makeText(LoginActivity.this, "Username " + username2 + "\n" + "Password " + password2, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Prisijungimo vardas: " + //Tarp skliausteliu yra parametrai; + sujungia eilutes
+                        usernameStr + "\n" + "Slaptazodis: " + passwordStr, Toast.LENGTH_LONG).show(); // Teksta, esanti tarp kabuciu, mato vartotojas
 
-                //Perform action on click
-                Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class);
+                Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class); //is kur {pirmas parametras .this}, i kur {antras parametras .class}
                 startActivity(goToSearchActivity);
-                //Klaidu zurnalo isvalymas
-                username.setError(null);
-                password.setError(null);
-                if (Validation.isCredentialsValid(username2) && Validation.isCredentialsValid(password2)){
 
-                    goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class);
-                    startActivity(goToSearchActivity);
-            } else {
-                    username.setError(getResources().getString(R.string.login_invalid_credentials_message));
-                    username.requestFocus();
-                }
-            }
-        });
-    }
-}
+
+            } //onClick pabaiga
+        }); //jie eina kartu, mygtuko paspaudimo funkcijo pabaiga
+
+    } //Funkcijos pabaiga
+
+} //Klases pabaiga
 
 
 

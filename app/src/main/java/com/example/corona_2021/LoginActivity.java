@@ -31,11 +31,11 @@ public class LoginActivity extends AppCompatActivity { //Klases pradzia
 
                 username.setError(null); //0 yra verte, skaicius. Null yra nieko, tuscia. setError - issivalome username klaidu zurnala. Pries validacija - klaidu nera.
                 password.setError(null);
-                if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) { //if prasideda salyga. if grazina true arba false. {} nusako ir salygos if pradzia ir pabaiga, ne tik funkcijos ir klases.
+                if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) { //if prasideda salyga. if grazina true arba false. {} nusako ir salygos if pradzia ir pabaiga, ne tik funkcijos ir klases. Kreipinyje i f-ja nenurodome tipo, nes jis aprasytas 29 eiluteje: usernameStr.
                     Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class); //is kur {pirmas parametras .this}, i kur {antras parametras .class}
                     startActivity(goToSearchActivity); //Jei bus validus duomenys, pereisime is vieno lango i kita.
-                } else { //visais kitais atvejais, todel nereikia skliausteliu.
-                    username.setError(getResources().getString(R.string.login_invalid_credentials));
+                } else { //visais kitais atvejais, todel nereikia skliausteliu. Tai tas pats if, tik nusako priesingu atveju
+                    username.setError(getResources().getString(R.string.login_invalid_credentials)); //jei nevalidus, ismesime i ekrana klaida
                     username.requestFocus(); //Ismeta lentele juoda prie username laukelio.
                     //Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_invalid_username), Toast.LENGTH_LONG).show();
                 }
@@ -55,9 +55,9 @@ public class LoginActivity extends AppCompatActivity { //Klases pradzia
 } //Klases pabaiga
 
 
-//if (!Validation.isUsernameValid(usernameStr)){ //! yra paneigimas, t. y. jeigu nebus validus, ismesime i ekrana klaida
-//username.setError(getResources().getString(R.string.login_invalid_username));
-//username.requestFocus();
+// } else if (!Validation.isUsernameValid(usernameStr)){ //! yra paneigimas, t. y. jeigu nebus validus, ismesime i ekrana klaida
+//  username.setError(getResources().getString(R.string.login_invalid_username)); getResources - R. raide kreipiames i resursus
+//  username.requestFocus();
 
 //Toast.makeText(LoginActivity.this, "Prisijungimo vardas: " + //Tarp skliausteliu yra parametrai; + sujungia eilutes
 //usernameStr + "\n" + "Slaptazodis: " + passwordStr, Toast.LENGTH_LONG).show(); // Teksta, esanti tarp kabuciu, mato vartotojas

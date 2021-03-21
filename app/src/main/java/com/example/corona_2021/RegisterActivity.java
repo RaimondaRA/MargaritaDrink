@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { //Funkcijos pradzia, antraste
+    protected void onCreate(Bundle savedInstanceState) { //Funkcijos pradzia, antraste. void - negrazinanti funkcija
         super.onCreate(savedInstanceState); //Sukuriamas tuscias langas
         setContentView(R.layout.activity_register); //Tusciam langui suteikiamas vaizdas, kuris aprasytas activity_register.xml faile
 
@@ -23,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Aprasomas kodas, susijes su mygtuko paspaudimu
         register.setOnClickListener(new View.OnClickListener() { //setOnClickListener yra kintamojo funkcija, kuri tikrina, kada mygtukas bus paspaustas
             @Override // Perrasome is anksto nustatyta mygtuko paspaudima, kas bus po paspaudimo
-            public void onClick(View view) { //Tai yra onClick metodas/funkcija. Funkscijos pradzia
+            public void onClick(View view) { //Tai yra onClick metodas/funkcija. Funkscijos pradzia. void - negrazinanti funkcija
                 //Cia rasomas kodas, kuris bus vykdomas paspaudus mygtuka
                 String usernameStr = username.getText().toString(); //Vartotojas suves eilute. Kreipiames i kintamaji, kad nuskaitytu vartotojo suvesta teksta
                 String emailStr = email.getText().toString(); //getText - issitraukiame eilute is EditText
@@ -33,8 +34,16 @@ public class RegisterActivity extends AppCompatActivity {
                 email.setError(null);
                 password.setError(null);
 
-                Intent goToLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class); //Is kur, i kur
-                startActivity(goToLoginActivity); //Jei bus validus duomenys, atsidarys login langas, pereisime is vieno lango i kita.
+                if (Validation.isUsernameValid(usernameStr) && Validation.isEmailValid(emailStr) && Validation.isPasswordValid(passwordStr)) { //Jei username ir password ir email validus - pereiname i kita langa
+                    Toast.makeText(RegisterActivity.this, "Username: " + usernameStr +
+                            "\n" + "Email: " + emailStr + "\n" + "Password: " + passwordStr, Toast.LENGTH_SHORT).show();
+
+                    Intent goToLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class); //Is kur, i kur
+                    startActivity(goToLoginActivity); //Jei bus validus duomenys, atsidarys login langas, pereisime is vieno lango i kita.
+                } else { //visais kitais atvejais, todel nereikia skliausteliu. Tai tas pats if, tik nusako priesingu atveju
+                    username.setError(getResources().getString(R.string.register_invalid_credentials)); //jei nevalidus, ismesime i ekrana klaida
+                    username.requestFocus();
+                }
 
             } //onClick funkcijos pabaiga
         }); //onClick pabaiga

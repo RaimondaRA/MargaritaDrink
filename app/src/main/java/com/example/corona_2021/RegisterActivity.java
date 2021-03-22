@@ -49,14 +49,13 @@ public class RegisterActivity extends AppCompatActivity {
                     if (!Validation.isUsernameValid(usernameStr)) {
                         username.setError(getResources().getString(R.string.register_invalid_username)); //jei nevalidus, ismesime i ekrana klaida
                         username.requestFocus();
-                        Toast.makeText(RegisterActivity.this, "Username must be 3-20 characters long and can contain only letters (a-z, A-Z) and numbers (0-9)", Toast.LENGTH_SHORT).show();
                     }
                     if (!Validation.isEmailValid(emailStr)) {
-                        email.setError(getResources().getString(R.string.register_invalid_email)); //jei nevalidus, ismesime i ekrana klaida
+                        email.setError(getResources().getString(R.string.register_invalid_email));
                         email.requestFocus();
                     }
                     if (!Validation.isPasswordValid(passwordStr)) {
-                        password.setError(getResources().getString(R.string.register_invalid_password)); //jei nevalidus, ismesime i ekrana klaida
+                        password.setError(getResources().getString(R.string.register_invalid_password));
                         password.requestFocus();
                     }
                 }

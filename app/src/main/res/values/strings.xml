@@ -15,6 +15,9 @@
     <string name="register_password">Password</string>
     <string name="register_email">Email address</string>
     <string name="register_register">Register</string>
-    <string name="register_invalid_credentials">Username and/or email and/or password does/do not meet requirements</string>
+<!--<string name="register_invalid_credentials">Username and/or email and/or password does/do not meet requirements</string>-->
+    <string name="register_invalid_username">Username must be 3-20 characters long and can contain any uppercase/lowercase letters (a-z, A-Z) and numbers (0-9)</string>
+    <string name="register_invalid_email">Email must be 10-50 characters long and can contain some special characters (@.-_)</string>
+    <string name="register_invalid_password">Password must be 5–20 characters long and can contain some special characters (@.!_)</string>
 
 </resources>

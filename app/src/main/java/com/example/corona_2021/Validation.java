@@ -33,10 +33,10 @@ public class Validation {
     }
 
     //private static boolean isCredentialsValid(String string, String regexPattern) { //Perduodame du parametrus - string ir pattern. isCredentialsValid paims du parametrus: viename nurodysime tai, ka vartotojas iveda (username, password arba email), o kitas parametras - regexPattern, kuri perduosime is virsaus. Todel netenka prasmes Validation klaseje musu apsirasyti sablonai, nebent, jei is LoginActivity besikreipiant i sia f-ja, nurodysime Validation.isUsernameValid, isPasswordValid, tai viska pasiims
-        ////isCredentialsValid tampa universalia f-ja. Siuo atveju nereikia kurtis 3 f-ju, kad pravaliduoti 3 laukelius
-        //Pattern pattern = Pattern.compile(regexPattern); //Pattern yra klase. Sukuriamos username validacijai taisykles pagal nurodyta sablona. Sablonas sukurk (compile) kazka. Pattern.compile sukuria grieztas taisykles
-        //Matcher matcher = pattern.matcher(string); //Pagal anksciau sukurtas taisykles (eilute pries) palyginami vartotojo ivesti duomenys (username). Matcher - atitikmuo/atitikimas
-        //return matcher.find(); //Kadangi nera void, todel rasome return (graziname). Jei atitinka - grazins true, priesingu atveju - false
+    ////isCredentialsValid tampa universalia f-ja. Siuo atveju nereikia kurtis 3 f-ju, kad pravaliduoti 3 laukelius
+    //Pattern pattern = Pattern.compile(regexPattern); //Pattern yra klase. Sukuriamos username validacijai taisykles pagal nurodyta sablona. Sablonas sukurk (compile) kazka. Pattern.compile sukuria grieztas taisykles
+    //Matcher matcher = pattern.matcher(string); //Pagal anksciau sukurtas taisykles (eilute pries) palyginami vartotojo ivesti duomenys (username). Matcher - atitikmuo/atitikimas
+    //return matcher.find(); //Kadangi nera void, todel rasome return (graziname). Jei atitinka - grazins true, priesingu atveju - false
     //}
 }
 

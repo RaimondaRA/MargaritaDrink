@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity { //Klases pradzia
 
                 username.setError(null); //0 yra verte, skaicius. Null yra nieko, tuscia. setError - issivalome username klaidu zurnala. Pries validacija - klaidu nera.
                 password.setError(null);
+
                 if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) { //if prasideda salyga. if grazina true arba false. {} nusako ir salygos if pradzia ir pabaiga, ne tik funkcijos ir klases. Kreipinyje i f-ja nenurodome tipo, nes jis aprasytas 29 eiluteje: usernameStr.
                     Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class); //is kur {pirmas parametras .this}, i kur {antras parametras .class}
                     startActivity(goToSearchActivity); //Jei bus validus duomenys, pereisime is vieno lango i kita.

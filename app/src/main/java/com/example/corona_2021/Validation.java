@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Validation {
     public static final String USERNAME_REGEX_PATTERN = "^[a-zA-Z0-9]{3,20}$"; //globalusis kintamasis, matomas visur (visose f-jose), nes yra klases, o ne funkcijos viduje. Final - galutinis, nesikeicia. Static - matomas ir kitose klasese.
     public static final String PASSWORD_REGEX_PATTERN = "^[a-zA-Z0-9.!@_]{5,20}$"; //Jei kintamasis turi tris zodzius public static final, jis rasomas Capslock
-    public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9@._-]{10,50}$"; //Zemiau sias eilutes (simboliu kratinius) paversime i grieztas taisykles
+    public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+[a-zA-Z]{10,50}$"; //Zemiau sias eilutes (simboliu kratinius) paversime i grieztas taisykles
 
     public static boolean isUsernameValid(String username) { //funkcijos antraste. Boolean naujas bazinis tipas, dvi opcijos: true (1) arba false (0), kitas tipas - String. Jei yra void - funkcija niekur negrazina. "is" zodeliu pradedant, tai grazina true arba false. Aprasant f-ja, tipa reikia rasyti skliaustuose, kreipiantis - ne. isUsernameValid yra funkcija, o zemiau tokiu pat pavadinimu - kintamasis
         Pattern pattern = Pattern.compile(USERNAME_REGEX_PATTERN);

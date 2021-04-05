@@ -2,7 +2,7 @@ package com.example.corona_2021;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.content.Intent; //importuotos bibliotekos. Intent yra atskiras failas, o pries tai yra visi katalogai, aplankai
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;

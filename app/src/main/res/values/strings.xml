@@ -19,5 +19,7 @@
     <string name="register_invalid_username">Username must be 3-20 characters long and can contain any uppercase/lowercase letters (a-z, A-Z) and numbers (0-9)</string>
     <string name="register_invalid_email">Email must be 10-50 characters long and can contain some special characters (@.-_)</string>
     <string name="register_invalid_password">Password must be 5–20 characters long and can contain some special characters (@.!_)</string>
+    <string name="search_loading_data">Please wait for Covid data to be displayed</string>
+    <string name="search_error_reading_data">Could not read data from API. For more information:</string>
 
 </resources>

@@ -1,10 +1,18 @@
 package com.example.corona_2021;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -12,12 +20,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity { //cia yra globalus kintamieji, kurie aprasomi klases virsuje
     public static final String COVID_API = "https://covid19-api.weedmark.systems/api/v1/stats"; //kreipiames i URL, kad duotu si API
-    private ArrayList <Corona> coronaList = new ArrayList <Corona>();
+    private ArrayList<Corona> coronaList = new ArrayList<Corona>();
+
+    private RecyclerView recyclerView; //kintamasis. Recyclerview - korteliu vaizdas
+    private Adapter adapter; //tarpininkas tarp SearchActivity ir xml (conteiner, kur atvaizduosime korteles). Apjungia 2 skirtingas klases, dalis
+
+    private SearchView searchView = null; //paieskos vaizdas, kuriame piesime
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +42,55 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
         AsyncFetch asyncFetch = new AsyncFetch(); //Sukuriame AsyncFetch klase
         asyncFetch.execute(); //execute iskviecia metodus toje klaseje sukurtoje (t. y. AsyncFetch)
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        //perraseme onCreate. Norime kad antraste (menu juosta) butu su galimybe atlikti paieska joje, vesti paieskos zodzius
+        // adds item to action bar
+        getMenuInflater().inflate(R.menu.search, menu); //t.y. search.xml
+        // Get Search item from action bar and Get Search service
+        MenuItem searchItem = menu.findItem(R.id.action_search); //vartotojas irasys zodi paieskos
+        SearchManager searchManager = (SearchManager) SearchActivity.this.getSystemService(Context.SEARCH_SERVICE);
+        if (searchItem != null) { //2 ifai reikalingi, kad veiktu paieskos juosta (meniu)
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(SearchActivity.this.getComponentName()));
+            searchView.setIconified(false);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) { //padidinimo stiklas yra desineje puseje , ant kurio paspaudus, galima vesti paieskos zodzius
+        return super.onOptionsItemSelected(item);
+    }
+
+        // Every time when you press search button on keypad an Activity is recreated which in turn calls this function
+    @Override
+    protected void onNewIntent(Intent intent) { //vykdoma paieskos f-ja
+        // Get search query
+        //super.onNewIntent(intent);
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY); //issitraukiame, ka vartotojas suveda i meniu (paieskos) juosta
+            if (searchView != null) {
+                searchView.clearFocus(); //isvalo blyksinti kursoriu
+            }
+            //is visu valstybiu corona saraso sukuriamas sarasas pagal vartotojo ieskoma valstybe (query)
+            ArrayList<Corona> coronaListByCountry = JSON.getCoronaListByCountry(coronaList, query); //grazins sarasa
+
+            if (coronaListByCountry.size() == 0) {
+                Toast.makeText(this, getResources().getString(R.string.search_no_results) + query, Toast.LENGTH_SHORT).show();
+            }
+
+            //perdavimas duomenu Adapteriui ir RecyclerView sukurimas
+            recyclerView = (RecyclerView) findViewById(R.id.corona_list);
+            adapter = new Adapter(SearchActivity.this, coronaListByCountry);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(SearchActivity.this)); //korteles issidesciusios bus linijomis
+        }
+    }
+
     //klase AsyncFetch naudojame todel, kad bus du lygiagretus procesai (uzduotys). AsyncFetch turi tuos metodus, reikalingus lygiagreciam keliu procesu veikimui
     private class AsyncFetch extends AsyncTask<String, String, JSONObject> {//klase bus naudojama tik sios AsyncFetch klases viduje. Extends - prapleciame tevine klase AsyncTask, kuri atsakinga uz lygiagretuma (keliu procesu veikima vienu metu)
         ProgressDialog progressDialog = new ProgressDialog(SearchActivity.this); //nurodome, kur jis suksis, t.y. SearchActivity lange
@@ -40,7 +103,8 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
             progressDialog.show(); //bus rodomas besisukantis dialogas
         }
 
-        @Override //vyksta antras procesas tuo paciu metu, kai sukasi rutuliukas ekrane. Fone - kreipiames i URL, gauname duomenis
+        @Override
+        //vyksta antras procesas tuo paciu metu, kai sukasi rutuliukas ekrane. Fone - kreipiames i URL, gauname duomenis
         //Sis metodas skirtas gavimui JSON is API
         protected JSONObject doInBackground(String... strings) { //Sis metodas bus vykdomas tuo metu, kai vartotojas matys besisukanti dialoga (progressDialog)
             try { //try yra blogas, kuriame gali kilti klaidu, pvz. nepavyks nuskaityti JSON. Tai, kas ivyks, bus apdorojama catch'u - isimtyse. Programa neuzlus, o isves vartotojui tam tikrus pranesimus
@@ -74,17 +138,17 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
                 ).show();
             } //baigiasi catch
 
-            if(statusCode == HttpURLConnection.HTTP_OK){ //Jei viskas OK, galime tiketis JSON
+            if (statusCode == HttpURLConnection.HTTP_OK) { //Jei viskas OK, galime tiketis JSON
                 //System.err.println(jsonObject.toString()); //Atspausdins ilga JSON teksta (valstybiu sarasa). err - spausdins kaip klaida, kitokios spalvos. System.err - galime pasiziureti teksta terminale
                 //Toast.makeText(SearchActivity.this, jsonObject.toString(), //Isspausdins vartotojui JSON, jei viskas gerai
-                        //Toast.LENGTH_LONG
+                //Toast.LENGTH_LONG
                 //).show();
 
                 JSONArray jsonArray = null;
                 try {
                     jsonArray = JSON.getJSONArray(jsonObject); //is JSON object suformuoja JSON Array
                     coronaList = JSON.getList(jsonArray);
-                    System.out.println("Italy covidStats:" + JSON.getCoronaListByCountry(coronaList, "Italy")); //grazins sarasa
+
                 } catch (JSONException e) {
                     //e.printStackTrace();
                     System.out.println(getResources().getString(R.string.search_error_reading_data) + e.getMessage());

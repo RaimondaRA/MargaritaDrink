@@ -70,7 +70,8 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
     @Override
     protected void onNewIntent(Intent intent) { //vykdoma paieskos f-ja
         // Get search query
-        //super.onNewIntent(intent);
+
+        super.onNewIntent(intent);
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY); //issitraukiame, ka vartotojas suveda i meniu (paieskos) juosta
             if (searchView != null) {

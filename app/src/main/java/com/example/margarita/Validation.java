@@ -1,4 +1,4 @@
-package com.example.corona_2021;
+package com.example.margarita;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package com.example.corona_2021;
+package com.example.margarita;
 
 import android.content.Context;
 

@@ -49,7 +49,7 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
         // Get Search item from action bar and Get Search service
         MenuItem searchItem = menu.findItem(R.id.action_search); //vartotojas irasys zodi paieskos
         SearchManager searchManager = (SearchManager) SearchActivity.this.getSystemService(Context.SEARCH_SERVICE);
-        if (searchItem != null) { //2 ifai reikalingi, kad veiktu paieskos juosta (meniu)
+        if (searchItem != null) { //2 ifai reikalingi, kad veiktu paieskos juosta (meniu), kad ji butu sukurta
             searchView = (SearchView) searchItem.getActionView();
         }
         if (searchView != null) {
@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
 
         // Every time when you press search button on keypad an Activity is recreated which in turn calls this function
     @Override
-    protected void onNewIntent(Intent intent) { //vykdoma paieskos f-ja
+    protected void onNewIntent(Intent intent) { //vykdoma paieskos f-ja, kai paspaudziamas paieskos mygtukas
         // Get search query
 
         super.onNewIntent(intent);

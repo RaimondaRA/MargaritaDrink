@@ -37,12 +37,12 @@ public class JSON { //is URL istraukiamas JSON ir jis atspausdinamas
         }
     }
 
-    //metodas, kuris paims JSON objekta ir grazins masyva. Issitraukiame is JSON tik tai, kas mus domina. Nereikalingos info reikia atsikratyti. Isimsim pacia pradzia (meta duomenis) ir pabaigos simbolius
+    //metodas, kuris paims JSON objekta ir grazins JSON masyva. Issitraukiame is JSON tik tai, kas mus domina. Nereikalingos info reikia atsikratyti. Isimsim pacia pradzia (meta duomenis) ir pabaigos simbolius
     public static ArrayList<Margarita> getList(JSONArray jsonArray) throws JSONException {//metodo antraste. Grazins sarasa, Margarita klases objektu (ArrayList, o ne visa JSON). JSONArray yra klase ir jsonArray yra objektas. ArrayList - vienas is sarasu programavime
         ArrayList<Margarita> margaritaList = new ArrayList<Margarita>();//sukureme sarasa, kur norime pataplinti klases Margarita objektus. margaritaList - saraso pavadinimas.
         //isimti "data" is JSON (pirma eilute) ir issaugoti margarita objektu sarase (margaritaList)
         for (int i = 0; i < jsonArray.length(); i++) { //ciklas, rodo 3 salygas: pradinis iteratorius i
-            JSONObject jsonObject = jsonArray.getJSONObject(i); //eisim per visa sarasa JSON masyvo
+            JSONObject jsonObject = jsonArray.getJSONObject(i); //eisim per visa sarasa JSON masyva, sarasa. Issitrauksime reiksmes
             Margarita margarita = new Margarita( //Margarita konstruktorius, susideda is 5 elemntu. 1 elementas - idDrink, todel trauksime idDrink
                     //public Margarita(String idDrink, String strDrink, String strTags, String strCategory, String strGlass)
                     jsonObject.getString("idDrink"), //idDrink rasoma taip, kaip JSON duomenyse. Traukiant raktus is JSON, jie turi buti IDENTISKI

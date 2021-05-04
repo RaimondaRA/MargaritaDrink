@@ -17,7 +17,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> { //A
     List<Margarita> drinks; //duomenys, kuriuos mes perduodame Adapteriui per konstruktoriu
 
     // create constructor to initialize context and data sent from SearchActivity
-    public Adapter(Context context, List<Margarita> data) {
+    public Adapter(Context context, List<Margarita> data) { //context ateina is SearchActivity
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.drinks = data;

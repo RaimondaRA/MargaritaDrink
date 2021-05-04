@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity { //Klases pradzia
         setContentView(R.layout.activity_login); //Suteik tusciam langui šį vaizda (kodas susiejamas su vaizdu)
 
         final EditText username = findViewById(R.id.username); //Susiejamas elementas vaizde su kintamuoju kode
-        final EditText password = findViewById(R.id.password);
+        final EditText password = findViewById(R.id.password); //final naudojame - matomumas, nes password, username ir kt yra ir zemiau naudojami
         final CheckBox rememberMe = findViewById(R.id.remember_me);
         Button kaipNoriuTaipVadinu = findViewById(R.id.login);
         Button register = findViewById(R.id.register);
@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity { //Klases pradzia
 
         rememberMe.setChecked(user.isRememberedForLogin()); // grazins is sharedPreference kokia reiksme buvo ivesta vartotojo paskutini karta - grazins true arba false
 
-        if (rememberMe.isChecked()) { //isChecked - tikrina, ar pazymeta remember me, ar ne
-            username.setText(user.getUsernameForLogin(), TextView.BufferType.EDITABLE); //i EditText irasysime ta reiksme, kuria buvo paskutini karta sekmingai prisijunga
+        if (rememberMe.isChecked()) { //isChecked - tikrina, ar pazymeta remember me, ar ne, kai langas uzsikrauna
+            username.setText(user.getUsernameForLogin(), TextView.BufferType.EDITABLE); //i EditText irasysime ta reiksme, kuria buvo paskutini karta sekmingai prisijungta
             password.setText(user.getPasswordForLogin(), TextView.BufferType.EDITABLE); //BufferType.Editable - bus irasytas paskutinis prisijungimo vardas, bet vartotojas gales ji redaguoti, keisti
         } else {
             username.setText("", TextView.BufferType.EDITABLE); // paliekama tuscia eilute, jei remember me nepazymetas

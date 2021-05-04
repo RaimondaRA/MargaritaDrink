@@ -41,7 +41,7 @@ public class User { // Klases pradzia. Klase yra viena, todel is didziosios raid
     // get'eris atitinka grazinancia f-ja be parametru. Nes nenorime nieko keisti, norime gauti, kad grazintu.
 
     public String getUsernameForRegistration() {
-        return username; // Grazins stringa. Prie f-jos visada yra sklaisuteliai. Tuo skiriasi nuo kintamojo. Per parametruos siuo atveju nieko neperduodame, bet gauname username.
+        return username; // Grazins stringa. Prie f-jos visada yra skliausteliai. Tuo skiriasi nuo kintamojo. Per parametruos siuo atveju nieko neperduodame, bet gauname username.
     }
 
     ////set'eris atitinka negrazinancia f-ja su parametrais
@@ -67,11 +67,11 @@ public class User { // Klases pradzia. Klase yra viena, todel is didziosios raid
     }
 
     public String getUsernameForLogin() {
-        return this.sharedPreferences.getString(USERNAME_KEY, "");
+        return this.sharedPreferences.getString(USERNAME_KEY, ""); //nors kabutese tuscia - grazins tai, ka vartotojas ives
     }
 
     public void setUsernameForLogin(String username) {
-        this.sharedPreferences.edit().putString(USERNAME_KEY, username).commit();
+        this.sharedPreferences.edit().putString(USERNAME_KEY, username).commit(); //issaugomi vartotojo suvesti duomenys, raktas ir reiksmes
     }
 
     public String getPasswordForLogin() {
@@ -79,7 +79,7 @@ public class User { // Klases pradzia. Klase yra viena, todel is didziosios raid
     }
 
     public void setPasswordForLogin(String password) {
-        this.sharedPreferences.edit().putString(PASSWORD_KEY, password).commit();
+        this.sharedPreferences.edit().putString(PASSWORD_KEY, password).commit(); //commit - jei kazka keiciame sharedPreferences, tada reikia dar commit
     }
 
     public boolean isRememberedForLogin() {

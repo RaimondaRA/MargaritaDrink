@@ -56,7 +56,7 @@ public class Margarita {
     }
 
     @Override
-    public String toString() {
+    public String toString() {// toString grazina eilute tvarkinga - Drink name ir t.t.
         return "Margarita{" +
                 "Drink ID='" + id + '\'' +
                 ", Drink Name='" + name + '\'' +

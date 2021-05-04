@@ -25,8 +25,8 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> { //A
 
     // Inflate the layout when ViewHolder created
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) { //sukuria vaizdo laikytuva/kortele (container_corona.xml)
-        View view = inflater.inflate(R.layout.container_margarita, parent, false); //naudosime container_corona.xml
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) { //sukuria vaizdo laikytuva/kortele (container_margarita.xml)
+        View view = inflater.inflate(R.layout.container_margarita, parent, false); //naudosime container_margarita.xml
         MyHolder holder = new MyHolder(view);
         return holder;
     }
@@ -61,7 +61,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> { //A
         // create constructor to get widget reference
         public MyHolder(View itemView) {
             super(itemView);
-            textName = (TextView) itemView.findViewById(R.id.textName); //viska imame is container_corona.xml
+            textName = (TextView) itemView.findViewById(R.id.textName); //viska imame is container_margarita.xml
             textTypes = (TextView) itemView.findViewById(R.id.textTypes);
             textCategory = (TextView) itemView.findViewById(R.id.textCategory);
             textGlass = (TextView) itemView.findViewById(R.id.textGlass);

@@ -6,12 +6,12 @@ import android.content.SharedPreferences;
 public class User { // Klases pradzia. Klase yra viena, todel is didziosios raides. Klase kuriame tam, kad ja panaudotume uz jos ribu, todel public.
     // 1. Klases kintamieji (argumentai, pozymiai). Sie kintamieji bus naudojami Login ir Register languose.
     private String username; // Matomumas, programavimo tipas ir kintamasis
-    private String password;
+    private String password; //username, password ir email yra User klases pozymiai
     private String email;
 
     private SharedPreferences sharedPreferences;
 
-    private static final String PREFERENCES_PACKAGE_NAME = "com.example.corona_2021";
+    private static final String PREFERENCES_PACKAGE_NAME = "com.example.margarita";
     private static final String USERNAME_KEY = "username";
     private static final String PASSWORD_KEY = "password";
     private static final String REMEMBERME_KEY = "rememberMe";

@@ -38,9 +38,9 @@ public class JSON { //is URL istraukiamas JSON ir jis atspausdinamas
     }
 
     //metodas, kuris paims JSON objekta ir grazins masyva. Issitraukiame is JSON tik tai, kas mus domina. Nereikalingos info reikia atsikratyti. Isimsim pacia pradzia (meta duomenis) ir pabaigos simbolius
-    public static ArrayList<Margarita> getList(JSONArray jsonArray) throws JSONException {//metodo antraste. Grazins sarasa, Corona klases objektu (ArrayList, o ne visa JSON). JSONArray yra klase ir jsonArray yra objektas. ArrayList - vienas is sarasu programavime
-        ArrayList<Margarita> margaritaList = new ArrayList<Margarita>();//sukureme sarasa, kur norime pataplinti klases Corona objektus. coronaList - saraso pavadinimas.
-        //isimti "data" is JSON (pirma eilute) ir issaugoti corona objektu sarase (coronaList)
+    public static ArrayList<Margarita> getList(JSONArray jsonArray) throws JSONException {//metodo antraste. Grazins sarasa, Margarita klases objektu (ArrayList, o ne visa JSON). JSONArray yra klase ir jsonArray yra objektas. ArrayList - vienas is sarasu programavime
+        ArrayList<Margarita> margaritaList = new ArrayList<Margarita>();//sukureme sarasa, kur norime pataplinti klases Margarita objektus. margaritaList - saraso pavadinimas.
+        //isimti "data" is JSON (pirma eilute) ir issaugoti margarita objektu sarase (margaritaList)
         for (int i = 0; i < jsonArray.length(); i++) { //ciklas, rodo 3 salygas: pradinis iteratorius i
             JSONObject jsonObject = jsonArray.getJSONObject(i); //eisim per visa sarasa JSON masyvo
             Margarita margarita = new Margarita( //Margarita konstruktorius, susideda is 5 elemntu. 1 elementas - idDrink, todel trauksime idDrink
@@ -51,7 +51,7 @@ public class JSON { //is URL istraukiamas JSON ir jis atspausdinamas
                     jsonObject.getString("strCategory"), //visi raktai yra String tipo, eilutes, nors ir grazins int skaiciu
                     jsonObject.getString("strGlass")
             );
-            margaritaList.add(margarita); //eis per visus JSON sarase esancius objektus, paims objektus, issitrauks reiksmes, konstruosime corona klases objekta ir prideime i corona sarasa
+            margaritaList.add(margarita); //eis per visus JSON sarase esancius objektus, paims objektus, issitrauks reiksmes, konstruosime margarita klases objekta ir prideime i margarita sarasa
         }
 
         return margaritaList;
@@ -73,7 +73,7 @@ public class JSON { //is URL istraukiamas JSON ir jis atspausdinamas
     //pagal visa sarasa suformuos tik tra valstybe, kurios mumsreikia
     public static ArrayList<Margarita> getMargaritaListByQuery(ArrayList<Margarita> margaritaArrayList, String name) { //metodas, noresim gauti sarasa pagal kokteilio pavadinima. F-ja paims du parametrus - ArrayList, kokteil. pav. Grazins arrayList
         ArrayList<Margarita> margaritaListByQuery = new ArrayList<Margarita>();
-        //pereisime per visa sarasa Corona ArrayList, ieskosime tos valstybes ir formuosime
+        //pereisime per visa sarasa Margarita ArrayList, ieskosime tos valstybes ir formuosime
         for (Margarita margarita : margaritaArrayList) { //desineje puseje bus sukuriamas tos klases objektas, per kurios sarasa iteruojame. Iteruojame per klases objektus
             if (margarita.getName().contains(name)) { //contains metodas (vienas is String metodu) - iesko zodzio dalies is ivesto getName. Pradejus rasyti zodi, pradeda ieskoti.
                 margaritaListByQuery.add(margarita);

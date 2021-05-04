@@ -47,7 +47,7 @@ public class JSON { //is URL istraukiamas JSON ir jis atspausdinamas
                     //public Margarita(String idDrink, String strDrink, String strTags, String strCategory, String strGlass)
                     jsonObject.getString("idDrink"), //idDrink rasoma taip, kaip JSON duomenyse. Traukiant raktus is JSON, jie turi buti IDENTISKI
                     jsonObject.getString("strDrink"),
-                    jsonObject.getString("strTags"),
+                    jsonObject.getString("strAlcoholic"),
                     jsonObject.getString("strCategory"), //visi raktai yra String tipo, eilutes, nors ir grazins int skaiciu
                     jsonObject.getString("strGlass")
             );
